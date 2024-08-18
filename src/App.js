@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { decode } from "html-entities";
 import React, { Fragment, useEffect, useState } from "react";
 
 const App = () => {
@@ -16,6 +17,8 @@ const App = () => {
         }
         const json = await response.json();
         setData(json.results);
+        // setData(response.results);
+        console.log(json);
       } catch (error) {
         setError(error);
         console.error("Error fetching data:", error);
@@ -47,8 +50,7 @@ const App = () => {
                   {key}
                 </Typography>
                 &nbsp;&nbsp;
-                <Typography variant="h5">{item.question}</Typography>
-                
+                <Typography variant="h5">{decode(item.question)}</Typography>
               </Box>
             </Fragment>
           ))}
